@@ -20,7 +20,7 @@ app.url_map.strict_slashes = False
 
 # database condiguration
 if os.getenv("DATABASE_URL") is not None:
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+    #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
     #DIQ -05-17-21-solo para publicar
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace('postgres://', 'postgresql://', 1) 
     # (“postgres://“, “postgresql://“, 1) 
