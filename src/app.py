@@ -20,9 +20,12 @@ app.url_map.strict_slashes = False
 
 # database condiguration
 if os.getenv("DATABASE_URL") is not None:
-    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+    #app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+    #DIQ -05-17-21
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:////tmp/test.db"
+
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 MIGRATE = Migrate(app, db)
