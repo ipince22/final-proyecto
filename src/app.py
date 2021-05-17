@@ -11,6 +11,7 @@ from api.models import db
 from api.routes import api
 from api.admin import setup_admin
 #from models import Person
+from flask_mail import Mail #IMPORTAR LA FUNCION Mail() de flask_mail
 
 ENV = os.getenv("FLASK_ENV")
 static_file_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../public/')
@@ -29,6 +30,25 @@ db.init_app(app)
 
 # Allow CORS requests to this API
 CORS(app)
+
+
+#CONFIGURACION EMAIL
+mail_settings = {
+    "MAIL_SERVER": 'smtp.gmail.com',
+    "MAIL_PORT":  465,
+    "MAIL_USE_TLS": False,
+    "MAIL_USE_SSL": True,
+    "MAIL_USERNAME":  'flaskemail22@gmail.com', #ACA COLOQUEN EL CORREO DE LA APP DEL ALUMN
+    "MAIL_PASSWORD": 'ashly2709', #PASSWORD DEL CORREO DE LA APP DEL ALUMNO
+    "MAIL_DEFAULT_SENDER": 'flaskemail22@gmail.com'
+}
+
+
+app.config.update(mail_settings)
+mail = Mail(app)
+#agregan mail a la app y se va llamar en routes.py como current_app
+app.mail= mail
+#FIN CONFIGURACION EMAIL
 
 # add the admin
 setup_admin(app)
